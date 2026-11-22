@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_sl"]
+[ext_resource type="Texture2D" path="res://assets/slime.png" id="2_sl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl_body"]
+size = Vector2(32, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl_touch"]
+size = Vector2(40, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl_stomp"]
+size = Vector2(46, 12)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_sl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -6)
+scale = Vector2(2, 2)
+texture = ExtResource("2_sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_sl_body")
+
+[node name="EdgeRay" type="RayCast2D" parent="."]
+position = Vector2(26, 0)
+target_position = Vector2(0, 44)
+
+[node name="StompZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompZone"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_sl_stomp")
+
+[node name="TouchZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchZone"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_sl_touch")

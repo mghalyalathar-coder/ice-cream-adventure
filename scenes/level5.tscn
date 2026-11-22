@@ -1,0 +1,260 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cg853hagn61n4" path="res://scenes/player.tscn" id="1_pl"]
+[ext_resource type="Script" uid="uid://ctv03qodieqah" path="res://scripts/level.gd" id="1_lvl"]
+[ext_resource type="Texture2D" uid="uid://eqsnqbxtl42m" path="res://assets/ground_top.png" id="2_gnd"]
+[ext_resource type="Texture2D" uid="uid://bl6qohuuxy7o2" path="res://assets/bg_sky.png" id="3_sky"]
+[ext_resource type="PackedScene" uid="uid://cr2r7a2i0k00b" path="res://scenes/coin.tscn" id="4_coin"]
+[ext_resource type="Texture2D" uid="uid://ble30qxuuf5mp" path="res://assets/heart.png" id="5_hrt"]
+[ext_resource type="PackedScene" path="res://scenes/slime.tscn" id="14_sl"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="13_cp"]
+[ext_resource type="PackedScene" path="res://scenes/kill_zone.tscn" id="12_kz"]
+[ext_resource type="PackedScene" path="res://scenes/powerup.tscn" id="17_pu"]
+[ext_resource type="PackedScene" path="res://scenes/moving_platform.tscn" id="15_mp"]
+[ext_resource type="PackedScene" path="res://scenes/falling_platform.tscn" id="16_fp"]
+[ext_resource type="PackedScene" uid="uid://c02by0v552y6r" path="res://scenes/spikes.tscn" id="10_sp"]
+[ext_resource type="PackedScene" uid="uid://doq1t3gaw38wg" path="res://scenes/flag.tscn" id="8_flg"]
+[ext_resource type="PackedScene" path="res://ui/game_over.tscn" id="11_gmov"]
+[ext_resource type="PackedScene" path="res://ui/level_complete.tscn" id="18_lc"]
+[ext_resource type="PackedScene" path="res://ui/win_screen.tscn" id="19_ws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fla"]
+size = Vector2(700, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flb"]
+size = Vector2(400, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flc"]
+size = Vector2(300, 32)
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_lvl")
+
+[node name="Player" parent="." instance=ExtResource("1_pl")]
+position = Vector2(100, 200)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -40)
+limit_left = 0
+limit_top = 0
+limit_right = 2400
+limit_bottom = 360
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="FloorA" type="StaticBody2D" parent="."]
+position = Vector2(0, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorA"]
+position = Vector2(350, 16)
+shape = SubResource("RectangleShape2D_fla")
+
+[node name="FloorASprite" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(0, 300)
+texture = ExtResource("2_gnd")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 700, 32)
+
+[node name="FloorB" type="StaticBody2D" parent="."]
+position = Vector2(1100, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorB"]
+position = Vector2(200, 16)
+shape = SubResource("RectangleShape2D_flb")
+
+[node name="FloorBSprite" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(1100, 300)
+texture = ExtResource("2_gnd")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 400, 32)
+
+[node name="FloorC" type="StaticBody2D" parent="."]
+position = Vector2(2100, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorC"]
+position = Vector2(150, 16)
+shape = SubResource("RectangleShape2D_flc")
+
+[node name="FloorCSprite" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(2100, 300)
+texture = ExtResource("2_gnd")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 300, 32)
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+layer = -10
+
+[node name="Langit" type="ParallaxLayer" parent="Parallax"]
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Langit"]
+position = Vector2(1, -18)
+scale = Vector2(1.6296875, 1)
+texture = ExtResource("3_sky")
+centered = false
+modulate = Color(0.75, 0.6, 0.95, 1)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CoinLabel" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 20
+text = "Koin: 0"
+
+[node name="LivesLabel" type="Label" parent="HUD"]
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 99.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 20
+text = "Nyawa: 3"
+
+[node name="PowerLabel" type="Label" parent="HUD"]
+visible = false
+offset_left = 120.0
+offset_top = 0.0
+offset_right = 240.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Cokelat: 8.0 dtk"
+
+[node name="Heart1" type="Sprite2D" parent="HUD"]
+position = Vector2(22, 68)
+scale = Vector2(2, 2)
+texture = ExtResource("5_hrt")
+
+[node name="Heart2" type="Sprite2D" parent="HUD"]
+position = Vector2(54.999996, 67)
+scale = Vector2(2.5384614, 2.083333)
+texture = ExtResource("5_hrt")
+
+[node name="Heart3" type="Sprite2D" parent="HUD"]
+position = Vector2(90, 67)
+scale = Vector2(2, 2)
+texture = ExtResource("5_hrt")
+
+[node name="GameOverScreen" parent="." instance=ExtResource("11_gmov")]
+
+[node name="LevelCompleteScreen" parent="." instance=ExtResource("18_lc")]
+
+[node name="WinScreen" parent="." instance=ExtResource("19_ws")]
+
+[node name="Checkpoint" parent="." instance=ExtResource("13_cp")]
+position = Vector2(300, 283)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("13_cp")]
+position = Vector2(2140, 283)
+
+[node name="KillZone" parent="." instance=ExtResource("12_kz")]
+position = Vector2(1000, 540)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("15_mp")]
+position = Vector2(830, 250)
+jarak = 240.0
+
+[node name="PowerUp" parent="." instance=ExtResource("17_pu")]
+position = Vector2(1470, 268)
+
+[node name="Flag" parent="." instance=ExtResource("8_flg")]
+position = Vector2(2360, 300)
+
+[node name="FallPlatform1" parent="." instance=ExtResource("16_fp")]
+position = Vector2(1560, 240)
+
+[node name="FallPlatform2" parent="." instance=ExtResource("16_fp")]
+position = Vector2(1700, 240)
+
+[node name="FallPlatform3" parent="." instance=ExtResource("16_fp")]
+position = Vector2(1840, 240)
+
+[node name="FallPlatform4" parent="." instance=ExtResource("16_fp")]
+position = Vector2(1980, 240)
+
+[node name="Spikes" parent="." instance=ExtResource("10_sp")]
+position = Vector2(430, 300)
+
+[node name="Spikes2" parent="." instance=ExtResource("10_sp")]
+position = Vector2(480, 300)
+
+[node name="Spikes3" parent="." instance=ExtResource("10_sp")]
+position = Vector2(1300, 300)
+
+[node name="Spikes4" parent="." instance=ExtResource("10_sp")]
+position = Vector2(1350, 300)
+
+[node name="coin1" parent="." instance=ExtResource("4_coin")]
+position = Vector2(100, 280)
+
+[node name="coin2" parent="." instance=ExtResource("4_coin")]
+position = Vector2(160, 280)
+
+[node name="coin3" parent="." instance=ExtResource("4_coin")]
+position = Vector2(220, 280)
+
+[node name="coin4" parent="." instance=ExtResource("4_coin")]
+position = Vector2(340, 280)
+
+[node name="coin5" parent="." instance=ExtResource("4_coin")]
+position = Vector2(880, 220)
+
+[node name="coin6" parent="." instance=ExtResource("4_coin")]
+position = Vector2(980, 220)
+
+[node name="coin7" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1070, 220)
+
+[node name="coin8" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1140, 280)
+
+[node name="coin9" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1200, 280)
+
+[node name="coin10" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1300, 240)
+
+[node name="coin11" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1560, 220)
+
+[node name="coin12" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1700, 220)
+
+[node name="coin13" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1840, 220)
+
+[node name="coin14" parent="." instance=ExtResource("4_coin")]
+position = Vector2(1980, 220)
+
+[node name="coin15" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2060, 170)
+
+[node name="coin16" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2190, 280)
+
+[node name="coin17" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2240, 280)
+
+[node name="coin18" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2290, 280)
+
+[node name="coin19" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2340, 280)
+
+[node name="coin20" parent="." instance=ExtResource("4_coin")]
+position = Vector2(2380, 280)
+
+[node name="Slime" parent="." instance=ExtResource("14_sl")]
+position = Vector2(150, 286)
+
+[node name="Slime2" parent="." instance=ExtResource("14_sl")]
+position = Vector2(1230, 286)
+
+[node name="Slime3" parent="." instance=ExtResource("14_sl")]
+position = Vector2(2300, 286)

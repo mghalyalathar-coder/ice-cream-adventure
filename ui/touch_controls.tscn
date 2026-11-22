@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/touch_controls.gd" id="1_tc"]
+
+[node name="TouchControls" type="CanvasLayer"]
+layer = 25
+script = ExtResource("1_tc")
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(24, 240)
+scale = Vector2(6, 6)
+action = "move_left"
+modulate = Color(1, 1, 1, 0.55)
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(136, 240)
+scale = Vector2(6, 6)
+action = "move_right"
+modulate = Color(1, 1, 1, 0.55)
+
+[node name="Jump" type="TouchScreenButton" parent="."]
+position = Vector2(520, 240)
+scale = Vector2(6, 6)
+action = "jump"
+modulate = Color(1, 1, 1, 0.55)

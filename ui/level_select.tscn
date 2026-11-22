@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/level_select.gd" id="1_ls"]
+[ext_resource type="Texture2D" path="res://assets/bg_sky.png" id="2_sky"]
+
+[node name="LevelSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ls")
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sky")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Menu"]
+theme_override_font_sizes/font_size = 28
+text = "Pilih Level"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Menu"]
+size_flags_horizontal = 4
+columns = 3
+
+[node name="Level1" type="Button" parent="Menu/Grid"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="Menu/Grid"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="Menu/Grid"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="Menu/Grid"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Level 4"
+
+[node name="Level5" type="Button" parent="Menu/Grid"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Level 5"
+
+[node name="BackButton" type="Button" parent="Menu"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Kembali"

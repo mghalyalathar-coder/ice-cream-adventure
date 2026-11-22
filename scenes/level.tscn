@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://dwh423ta2cs4"]
+
+[ext_resource type="PackedScene" uid="uid://cg853hagn61n4" path="res://scenes/player.tscn" id="1_s4405"]
+[ext_resource type="Script" uid="uid://ctv03qodieqah" path="res://scripts/level.gd" id="1_ukt71"]
+[ext_resource type="Texture2D" uid="uid://eqsnqbxtl42m" path="res://assets/ground_top.png" id="2_36wlx"]
+[ext_resource type="Texture2D" uid="uid://bl6qohuuxy7o2" path="res://assets/bg_sky.png" id="3_dmi07"]
+[ext_resource type="PackedScene" uid="uid://cr2r7a2i0k00b" path="res://scenes/coin.tscn" id="4_7g0b6"]
+[ext_resource type="Texture2D" uid="uid://ble30qxuuf5mp" path="res://assets/heart.png" id="5_aw33w"]
+[ext_resource type="Script" uid="uid://caupmkrysdowy" path="res://scripts/hazard.gd" id="6_bddx0"]
+[ext_resource type="PackedScene" uid="uid://u7im3pbicgyf" path="res://scenes/platform.tscn" id="7_u2b8d"]
+[ext_resource type="PackedScene" uid="uid://doq1t3gaw38wg" path="res://scenes/flag.tscn" id="8_u2b8d"]
+[ext_resource type="PackedScene" uid="uid://c02by0v552y6r" path="res://scenes/spikes.tscn" id="10_ktmlt"]
+[ext_resource type="PackedScene" path="res://ui/game_over.tscn" id="11_gmov"]
+[ext_resource type="PackedScene" path="res://scenes/kill_zone.tscn" id="12_kz"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="13_cp"]
+[ext_resource type="PackedScene" path="res://scenes/slime.tscn" id="14_sl"]
+[ext_resource type="PackedScene" path="res://scenes/moving_platform.tscn" id="15_mp"]
+[ext_resource type="PackedScene" path="res://scenes/falling_platform.tscn" id="16_fp"]
+[ext_resource type="PackedScene" path="res://scenes/powerup.tscn" id="17_pu"]
+[ext_resource type="PackedScene" path="res://ui/level_complete.tscn" id="18_lc"]
+[ext_resource type="PackedScene" path="res://ui/win_screen.tscn" id="19_ws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bddx0"]
+size = Vector2(2000, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_015ha"]
+font_size = 40
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbvsk"]
+size = Vector2(4000, 50)
+
+[node name="level" type="Node2D" unique_id=298038975]
+script = ExtResource("1_ukt71")
+
+[node name="Player" parent="." unique_id=2042020411 instance=ExtResource("1_s4405")]
+position = Vector2(100, 200)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1731012318]
+offset = Vector2(0, -40)
+limit_left = 0
+limit_top = 0
+limit_right = 2000
+limit_bottom = 360
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="floor" type="StaticBody2D" parent="." unique_id=489533089]
+position = Vector2(0, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor" unique_id=99853308]
+position = Vector2(1000, 16)
+shape = SubResource("RectangleShape2D_bddx0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=799416428]
+texture_repeat = 2
+position = Vector2(0, 300)
+texture = ExtResource("2_36wlx")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 32)
+
+[node name="Parallax" type="ParallaxBackground" parent="." unique_id=1392184782]
+layer = -10
+
+[node name="Langit" type="ParallaxLayer" parent="Parallax" unique_id=1631229175]
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Langit" unique_id=526495072]
+position = Vector2(1, -18)
+scale = Vector2(1.6296875, 1)
+texture = ExtResource("3_dmi07")
+centered = false
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1970264200]
+
+[node name="CoinLabel" type="Label" parent="HUD" unique_id=2135476814]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 20
+text = "Koin: 0"
+
+[node name="WinLabel" type="Label" parent="HUD" unique_id=859862456]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(150, 150)
+text = "KAMU MENANG!"
+label_settings = SubResource("LabelSettings_015ha")
+
+[node name="LivesLabel" type="Label" parent="HUD" unique_id=914847732]
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 99.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 20
+text = "Nyawa: 3"
+
+[node name="Heart1" type="Sprite2D" parent="HUD" unique_id=1519367674]
+position = Vector2(22, 68)
+scale = Vector2(2, 2)
+texture = ExtResource("5_aw33w")
+
+[node name="Heart2" type="Sprite2D" parent="HUD" unique_id=271201028]
+position = Vector2(54.999996, 67)
+scale = Vector2(2.5384614, 2.083333)
+texture = ExtResource("5_aw33w")
+
+[node name="Heart3" type="Sprite2D" parent="HUD" unique_id=1134120643]
+position = Vector2(90, 67)
+scale = Vector2(2, 2)
+texture = ExtResource("5_aw33w")
+
+[node name="PowerLabel" type="Label" parent="HUD" unique_id=858336278]
+visible = false
+offset_left = 120.0
+offset_right = 240.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "Cokelat: 8.0 dtk"
+
+[node name="coin" parent="." unique_id=1913635785 instance=ExtResource("4_7g0b6")]
+position = Vector2(300, 280)
+
+[node name="coin2" parent="." unique_id=1284469796 instance=ExtResource("4_7g0b6")]
+position = Vector2(340, 280)
+
+[node name="coin3" parent="." unique_id=648463188 instance=ExtResource("4_7g0b6")]
+position = Vector2(380, 280)
+
+[node name="coin4" parent="." unique_id=2073697175 instance=ExtResource("4_7g0b6")]
+position = Vector2(520, 220)
+
+[node name="coin5" parent="." unique_id=1438515261 instance=ExtResource("4_7g0b6")]
+position = Vector2(600, 280)
+
+[node name="DEAT ZONE" type="Area2D" parent="." unique_id=1924255603]
+script = ExtResource("6_bddx0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DEAT ZONE" unique_id=1144450060]
+position = Vector2(1000, 450)
+shape = SubResource("RectangleShape2D_dbvsk")
+
+[node name="platform" parent="." unique_id=1159775247 instance=ExtResource("7_u2b8d")]
+position = Vector2(520, 230)
+
+[node name="Flag" parent="." unique_id=1051567909 instance=ExtResource("8_u2b8d")]
+position = Vector2(800, 300)
+
+[node name="spikes" parent="." unique_id=1229313358 instance=ExtResource("10_ktmlt")]
+position = Vector2(700, 300)
+
+[node name="GameOverScreen" parent="." unique_id=1515718625 instance=ExtResource("11_gmov")]
+
+[node name="Checkpoint" parent="." unique_id=1528230960 instance=ExtResource("13_cp")]
+position = Vector2(400, 283)
+
+[node name="KillZone" parent="." unique_id=1951366403 instance=ExtResource("12_kz")]
+position = Vector2(1000, 540)
+
+[node name="Slime" parent="." unique_id=1769017017 instance=ExtResource("14_sl")]
+position = Vector2(1200, 286)
+
+[node name="Slime2" parent="." unique_id=606332107 instance=ExtResource("14_sl")]
+position = Vector2(1500, 286)
+
+[node name="MovingPlatform" parent="." unique_id=452624478 instance=ExtResource("15_mp")]
+position = Vector2(900, 250)
+
+[node name="FallingPlatform" parent="." unique_id=572130434 instance=ExtResource("16_fp")]
+position = Vector2(1100, 240)
+
+[node name="PowerUp" parent="." unique_id=940632157 instance=ExtResource("17_pu")]
+position = Vector2(640, 268)
+
+[node name="LevelCompleteScreen" parent="." unique_id=1986396891 instance=ExtResource("18_lc")]
+
+[node name="WinScreen" parent="." unique_id=184704831 instance=ExtResource("19_ws")]

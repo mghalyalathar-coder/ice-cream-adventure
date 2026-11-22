@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/one_shot_particles.gd" id="1_pop"]
+
+[node name="CoinPop" type="CPUParticles2D"]
+amount = 12
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 110.0
+initial_velocity_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(1, 0.85, 0.25, 1)
+script = ExtResource("1_pop")

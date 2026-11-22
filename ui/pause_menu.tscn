@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_pm"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 30
+visible = false
+script = ExtResource("1_pm")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="Center" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 32
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Center"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Lanjut"
+
+[node name="RetryButton" type="Button" parent="Center"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Ulangi Level"
+
+[node name="MenuButton" type="Button" parent="Center"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Menu Utama"
+
+[node name="MusikLabel" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 12
+text = "Musik"
+horizontal_alignment = 1
+
+[node name="MusikSlider" type="HSlider" parent="Center"]
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(220, 16)
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SfxLabel" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 12
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="Center"]
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(220, 16)
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MuteHint" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 12
+text = "Tekan M untuk mute semua suara"
+horizontal_alignment = 1

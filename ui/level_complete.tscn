@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/level_complete.gd" id="1_lc"]
+
+[node name="LevelComplete" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+visible = false
+script = ExtResource("1_lc")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Fade" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+mouse_filter = 2
+
+[node name="Center" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 40
+text = "LEVEL SELESAI!"
+horizontal_alignment = 1
+
+[node name="CoinsLabel" type="Label" parent="Center"]
+theme_override_font_sizes/font_size = 24
+text = "Koin level ini: 0"
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="Center"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Lanjut"
+
+[node name="MenuButton" type="Button" parent="Center"]
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Menu Utama"
